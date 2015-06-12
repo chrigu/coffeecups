@@ -1,0 +1,17 @@
+.full-bg {
+  display: none;
+}
+
+.full-bg.main {
+  display: block;
+  width:100%;
+  height:400px;
+  background-image:url('/assets/espresso.jpg');
+  background-size:cover;
+  position: absolute;
+  top: 0;
+}
+
+.intro {
+  height: 400px;
+}

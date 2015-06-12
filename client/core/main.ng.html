@@ -1,0 +1,87 @@
+<div class="hero full-width intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Finde guten Kaffee</h3>
+                <div>
+                    <p>
+                        Some text blalblablalba
+                    </p>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container container-fluid" role="main">
+
+    <div class="row">
+        <div class="col-md-6">
+            <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>
+                <ui-gmap-markers
+                        models='vm.nearCoffeeBars'
+
+                        idKey="'_id'"
+                        labelContent='vm.nearCoffeeBars.name'
+
+                        coords="'position.coordinates'"
+                        icon="'https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi_hdpi.png'"
+
+                        >
+                </ui-gmap-markers>
+            </ui-gmap-google-map>
+        </div>
+        <div class="col-md-6">
+            <h3>Kaffees in deiner Nähe</h3>
+            <ul>
+                <li ng-repeat="coffeeBar in vm.nearCoffeeBars"><a ui-sref="coffeeBar({ uid: coffeeBar._id })">{{ coffeeBar.name }}</a></li>
+            </ul>
+            <h3>Beste Kaffees</h3>
+            <ul>
+                <li ng-repeat="coffee in vm.bestCoffees"><a ui-sref="coffee({ uid: coffee._id })">{{ coffee.coffeeType }} im {{ coffee.barName}}</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <h3 class="col-md-12">Finde guten Kaffee</h3>
+        <div class="col-md-2">
+            <input type="text" placeholder="Ort" />
+        </div>
+        <div class="col-md-2">
+            <select class="form-control">
+                <option>Neuste</option>
+                <option>Nächste</option>
+            </select>
+        </div>
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                <th>Kaffeetyp</th>
+                <th>Bar</th>
+                <th>Bewertung</th>
+                <th>Ort</th>
+                </thead>
+                <tr ng-repeat="coffee in vm.allCoffees">
+                    <td>{{ coffee.coffeeType }}</td>
+                    <td>{{ coffee.barName }}</td>
+                    <td>{{ coffee.rating }}</td>
+                    <td>{{ coffee.type }}</td>
+                </tr>
+            </table>
+
+        </div>
+        <div class="col-md-6">
+            <h3>Kaffees in deiner Nähe</h3>
+            <ul>
+                <li ng-repeat="coffeeBar in vm.nearCoffeeBars"><a ui-sref="coffeeBar({ uid: coffeeBar._id })">{{ coffeeBar.name }}</a></li>
+            </ul>
+            <h3>Beste Kaffees</h3>
+            <ul>
+                <li ng-repeat="coffee in vm.bestCoffees"><a ui-sref="coffee({ uid: coffee._id })">{{ coffee.coffeeType }} im {{ coffee.barName}}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

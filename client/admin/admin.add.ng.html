@@ -1,0 +1,90 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1>Add new coffee</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div ng-class="ctrl.infoClass">{{ctrl.infoText}}</div>
+        <form novalidate class="addform" name="addBarFormController">
+            <div class="form-group">
+                <div class="addform-bar">
+                    <div class="addform-bar-name">
+                        <angucomplete id="coffeeBar"
+                                      placeholder="Bar Name"
+                                      pause="50"
+                                      selectedobject="ctrl.selectedCoffeeBar"
+                                      localdata="ctrl.coffeeBars"
+                                      searchfields="name"
+                                      titlefield="name"
+                                      minlength="1"
+                                      inputclass="form-control form-control-small"
+                                      searchstr="ctrl.coffeeBar.name"
+                                ></angucomplete>
+                    </div>
+                    <div ng-show="ctrl.showBarDetails">
+                        <label>City:</label> <input name="city" ng-model="ctrl.coffeeBar.city"/>
+                        <label>Country:</label> <input name="country" ng-model="ctrl.coffeeBar.country"/>
+                    </div>
+                </div>
+                <select ng-model="ctrl.coffeeType" ng-options="coffee.name for coffee in ctrl.coffeeTypes">
+                    <option value="">-- Wähle Kaffeetyp --</option>
+                </select>
+                <button ng-click="ctrl.pickFile()">Add picture</button>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" ng-class="{ 'has-error' : addBarFormController.coffeeAroma.$invalid && !addBarFormController.coffeeAroma.$pristine }">
+                                <label for="coffeeAroma">Aroma</label>
+                                <input type="number" class="form-control" name="coffeeAroma" id="coffeeAroma" ng-model="ctrl.coffee.aroma" required/>
+                                <span class="help-inline" ng-show="submitted && addBarFormController.coffeeAroma.$error.required">Required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="coffeeAtmosphere">Atmosphere</label>
+                                <input type="number" class="form-control" id="coffeeAtmosphere" ng-model="ctrl.coffee.atmosphere" required/>
+                                <span class="help-inline" ng-show="submitted && addBarFormController.coffeeAroma.$error.required">Required</span>
+                            </div>
+                            <div class="form-group">
+
+                                <label for="coffeeAccessoires">Accessoires</label>
+                                <input type="number" class="form-control" id="coffeeAccessoires" ng-model="ctrl.coffee.accessories" required/>
+                                <span class="help-inline" ng-show="submitted && addBarFormController.coffeeAroma.$error.required">Required</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="coffeeAppearance">Appearance</label>
+                                <input type="number" class="form-control" id="coffeeAppearance" ng-model="ctrl.coffee.appearance" required/>
+                                <span class="help-inline" ng-show="submitted && addBarFormController.coffeeAroma.$error.required">Required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="coffeeAdditional">Additional</label>
+                                <input type="number" class="form-control" id="coffeeAdditional" ng-model="ctrl.coffee.additional" required/>
+                                <span class="help-inline" ng-show="submitted && addBarFormController.coffeeAroma.$error.required">Required</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="button" ng-click="submitted=false;ctrl.reset(addBarFormController)" value="Reset" />
+                <input type="submit" ng-click="submitted=true;ctrl.add(addBarFormController)" value="Save" />
+                <tt>addBarFormController.coffeeAroma.$pristine = {{addBarFormController.coffeeAroma.$pristine}}</tt><br>
+                <tt>addBarFormController.input.$error = {{addBarFormController.input.$error}}</tt><br>
+                <tt>addBarFormController.coffeeAroma.$invalid = {{addBarFormController.coffeeAroma.$invalid}}</tt><br>
+                <tt>addBarFormController.$error.required = {{!!addBarFormController.$error.required}}</tt><br>
+            </div>
+        </form>
+        <li ng-repeat="coffee in ctrl.coffeeBars">
+            <p>{{coffee.name}}</p>
+        </li>
+        <p>{{ ctrl.selectedCoffeeBar.title }}</p>
+        <p>{{ ctrl.coffeeBar.name }}</p>
+        <ui-gmap-google-map center='ctrl.map.center' zoom='ctrl.map.zoom'>
+            <ui-gmap-marker coords="ctrl.location.coords" options="ctrl.location.options" idKey="'asdf'"
+                            icon="'https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi_hdpi.png'"
+                            events="ctrl.location.events">
+            </ui-gmap-marker>
+        </ui-gmap-google-map>
+        <cta-add-form></cta-add-form>
+    </div>
+</div>

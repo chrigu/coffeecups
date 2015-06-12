@@ -1,0 +1,1 @@
+angular.module('coffeeCup.core',['angular-meteor', 'ui.router']);

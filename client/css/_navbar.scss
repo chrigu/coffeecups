@@ -1,0 +1,22 @@
+@font-face {
+    font-family: "Pacifico";
+    src: url(/fonts/Pacifico/Pacifico.ttf);
+}
+
+.navbar {
+//  background-color: #8A4130;
+  background-color: transparent;
+  color: #fff;
+  margin-bottom: 0;
+  border-bottom: 0;
+  font-size: 2em;
+
+  h1 {
+    color: #000;
+    font-family: 'Pacifico', cursive;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+}
