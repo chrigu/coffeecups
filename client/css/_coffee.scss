@@ -1,0 +1,37 @@
+.coffee-rating ul {
+  list-style: none;
+}
+
+.coffee-rating__score {
+  clear: both;
+}
+
+.cc-rating__score__title {
+  width: 30%;
+  float: left;
+}
+
+.cc-rating__score__points {
+  float: left;
+  width: 70%;
+  background-color: rgba(200, 220, 240, 1);
+
+  &.zero {
+    width: 0%;
+  }
+  &.twenty {
+    width: 20%;
+  }
+  &.fourty {
+    width: 40%;
+  }
+  &.sixty {
+    width: 60%;
+  }
+  &.eighty {
+    width: 80%;
+  }
+  &.hundred {
+    width: 100%;
+  }
+}

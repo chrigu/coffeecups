@@ -1,4 +1,4 @@
-var adminModule = angular.module('coffeeCup.admin', [
+var adminModule = angular.module('coffeeCups.admin', [
     'angular-meteor', 'ui.router', 'angucomplete', 'angularLoad', 'ngGeolocation', 'uiGmapgoogle-maps',
     'ui.bootstrap'
 ]);

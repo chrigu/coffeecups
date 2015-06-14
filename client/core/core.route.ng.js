@@ -1,4 +1,4 @@
-angular.module("coffeeCup.core").config(function($urlRouterProvider, $stateProvider, $locationProvider){
+angular.module("coffeeCups.core").config(function($urlRouterProvider, $stateProvider, $locationProvider){
 
         $locationProvider.html5Mode(true);
 

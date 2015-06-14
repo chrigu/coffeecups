@@ -1,5 +1,5 @@
 
-angular.module('coffeeCup.admin')
+angular.module('coffeeCups.admin')
     .controller('AdminLoginController', function ($meteor) {
 
         var self = this;

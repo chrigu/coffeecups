@@ -1,5 +1,5 @@
 
-angular.module('coffeeCup.admin')
+angular.module('coffeeCups.admin')
     .controller('AdminAddController', function ($scope, $meteor, $geolocation, angularLoad) {
 
             var self = this;
@@ -70,7 +70,7 @@ angular.module('coffeeCup.admin')
                     var dataObj = {
                         'coffeeBar': coffeeBar,
                         'coffee': self.coffee
-                    }
+                    };
                     console.log(dataObj);
 
                 }

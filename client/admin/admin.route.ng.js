@@ -1,4 +1,4 @@
-angular.module("coffeeCup.admin").run(function($rootScope, $state) {
+angular.module("coffeeCups.admin").run(function($rootScope, $state) {
   $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
     // We can catch the error thrown when the $requireUser promise is rejected
     // and redirect the user back to the main page
@@ -8,7 +8,7 @@ angular.module("coffeeCup.admin").run(function($rootScope, $state) {
   });
 });
 
-angular.module('coffeeCup.admin').config(function ($stateProvider) {
+angular.module('coffeeCups.admin').config(function ($stateProvider) {
 
     $stateProvider.state('adminLogin', {
         url: '/restricted/login',

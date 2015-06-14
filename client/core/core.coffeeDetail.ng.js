@@ -1,5 +1,5 @@
 
-angular.module('coffeeCup.core')
+angular.module('coffeeCups.core')
     .controller('CoffeeDetailController', function ($scope, $meteor, $geolocation, $stateParams) {
 
         var self = this;

@@ -6,6 +6,12 @@ Meteor.publish('bestCoffees', function(options) {
     return Coffees.find({sort: {score: -1}, limit: 10});
 });
 
+Meteor.publish('coffeesForBar', function(id) {
+    console.log(id);
+    check(id, String);
+    return Coffees.find({barId: id});
+});
+
 Meteor.publish('coffeeBars', function(options) {
     //check(options, {
     //    sort: Object,

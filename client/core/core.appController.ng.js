@@ -1,5 +1,5 @@
 
-angular.module('coffeeCup.core')
+angular.module('coffeeCups.core')
     .controller('AppCtrl', function ($scope, $state) {
 
         var self = this;
@@ -13,7 +13,7 @@ angular.module('coffeeCup.core')
         $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
             if (angular.isDefined(toState.data.bodyClass)) {
                 self.bodyClass = toState.data.bodyClass;
-                console.log(toState.data.bodyClass)
+                console.log(toState.data.bodyClass);
                 return;
             }
 

@@ -64,11 +64,12 @@
                 <th>Bewertung</th>
                 <th>Ort</th>
                 </thead>
-                <tr ng-repeat="coffee in vm.allCoffees">
+                <tr ng-repeat="coffee in vm.allCoffees" ng-click="vm.showCoffee(coffee._id)">
                     <td>{{ coffee.coffeeType }}</td>
                     <td>{{ coffee.barName }}</td>
                     <td>{{ coffee.rating }}</td>
                     <td>{{ coffee.type }}</td>
+                    <td>{{ coffee.barCity }}</td>
                 </tr>
             </table>
 

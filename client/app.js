@@ -1,1 +1,1 @@
-angular.module('coffeeCup',['angular-meteor', 'ui.router', 'coffeeCup.core', 'coffeeCup.admin', 'ui.bootstrap']);
+angular.module('coffeeCups',['angular-meteor', 'ui.router', 'coffeeCups.core', 'coffeeCups.admin', 'ui.bootstrap']);

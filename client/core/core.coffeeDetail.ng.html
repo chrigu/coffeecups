@@ -1,4 +1,4 @@
-<div class="container-fluid header">
+<div class="container container-fluid header">
     <div class="row">
         <ol class="breadcrumb">
             <li><a href="/">Übersicht</a></li>
@@ -8,19 +8,31 @@
     </div>
 </div>
 
-<div class="container-fluid header">
+<div class="container container-fluid header">
     <div class="row">
+        <div class="col-md-12">
+            <h2 ng-bind-template="{{ vm.coffee.coffeeType }} {{ vm.coffee.barName }} in {{ vm.coffee.barCity }}"></h2>
+        </div>
+    </div>
+    <div class="row coffee-rating">
         <div class="col-md-6">
-            <p>{{ vm.coffee.coffeeType }}</p>
-            <p>{{ vm.coffee.barName }}</p>
+            <ul>
+                <li class="col-md-12 coffee-rating__score coffee-rating__score--aroma">
+                    <cc-score name="Aroma" max="5" score="vm.coffee.aroma"></cc-score>
+                </li>
+                <li class="col-md-12 coffee-rating__score coffee-rating__score--appearance">
+                    <cc-score name="Appearance" max="5" score="vm.coffee.appearance"></cc-score>
+                </li>
+                <li class="col-md-12 coffee-rating__score coffee-rating__score--atmosphere">
+                    <cc-score name="Atmosphere" max="5" score="vm.coffee.atmosphere"></cc-score>
+                </li>
+                <li class="col-md-12 coffee-rating__score coffee-rating__score--additional">
+                    <cc-score name="Additional" max="5" score="vm.coffee.additional"></cc-score>
+                </li>
+            </ul>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
-            <p>{{ vm.coffee.aroma }}</p>
-            <p>{{ vm.coffee.appearance }}</p>
-            <p>{{ vm.coffee.atmosphere }}</p>
-            <p>{{ vm.coffee.additional }}</p>
+
         </div>
     </div>
-</div>

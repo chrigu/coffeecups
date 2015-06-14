@@ -1,9 +1,13 @@
 
-angular.module('coffeeCup.core')
-    .controller('MainController', function ($scope, $meteor, $geolocation) {
+angular.module('coffeeCups.core')
+    .controller('MainController', function ($scope, $meteor, $geolocation, $state) {
 
         var self = this;
         activate();
+
+        self.showCoffee = function(id) {
+            $state.go("coffee", {uid: id});
+        };
 
         function activate() {
             //self.infoClass = "";

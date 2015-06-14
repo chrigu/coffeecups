@@ -47,6 +47,7 @@ if (Coffees.find().count() === 0) {
         additional: 1,
         appearance: 2,
         barName: "Adrianos",
+        barCity: "Bern",
         barId: bar1
     });
     Coffees.insert({
@@ -56,6 +57,7 @@ if (Coffees.find().count() === 0) {
         additional: 1,
         appearance: 2,
         barName: "Adrianos",
+        barCity: "Bern",
         barId: bar1
     });
     Coffees.insert({
@@ -65,6 +67,7 @@ if (Coffees.find().count() === 0) {
         additional: 1,
         appearance: 2,
         barName: "Bubbles",
+        barCity: "Lausanne",
         barId: bar2
     });
     Coffees.insert({
@@ -74,6 +77,7 @@ if (Coffees.find().count() === 0) {
         additional: 1,
         appearance: 3,
         barName: "Some coffee",
+        barCity: "Luzern",
         barId: bar3
     });
 }
