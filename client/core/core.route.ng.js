@@ -1,36 +1,67 @@
 angular.module("coffeeCups.core").config(function($urlRouterProvider, $stateProvider, $locationProvider){
 
-        $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true);
 
-        $stateProvider
-            .state('main', {
-                url: '/',
-                templateUrl: 'client/core/main.ng.html',
-                controller: 'MainController',
-                controllerAs: 'vm',
-                data: {
-                    bodyClass: "main"
-                }
-            })
-            .state('coffee', {
-                url: '/coffee/:uid',
-                templateUrl: 'client/core/core.coffeeDetail.ng.html',
-                controller: 'CoffeeDetailController',
-                controllerAs: 'vm',
-                data: {
-                    bodyClass: "coffee"
-                }
-            })
-            .state('coffeeBar', {
-                url: '/coffeebar/:uid',
-                templateUrl: 'client/core/core.coffeeBarDetail.ng.html',
-                controller: 'CoffeeBarDetailController',
-                controllerAs: 'vm',
-                data: {
-                    bodyClass: "coffeeBar"
-                }
-            });
+    $stateProvider
+        .state('main', {
+            url: '/',
+            templateUrl: 'client/core/main.ng.html',
+            controller: 'MainController',
+            controllerAs: 'vm',
+            data: {
+                bodyClass: "main"
+            },
+            resolve: {
+                'coffees': [
+                    '$meteor', function($meteor) {
+                        return $meteor.subscribe('coffees');
+                    }
+                ],
+                'coffeeBars': [
+                    '$meteor', function($meteor) {
+                        return $meteor.subscribe('coffeeBars');
+                    }
+                ]
+            }
+        })
+        .state('coffee', {
+            url: '/coffee/:uid',
+            templateUrl: 'client/core/core.coffeeDetail.ng.html',
+            controller: 'CoffeeDetailController',
+            controllerAs: 'vm',
+            data: {
+                bodyClass: "coffee"
+            },
+            resolve: {
+                'coffee': [
+                    '$meteor', '$stateParams', function($meteor, $stateParams) {
+                        return $meteor.subscribe('coffee', $stateParams.uid);
+                    }
+                ]
+            }
+        })
+        .state('coffeeBar', {
+            url: '/coffeebar/:uid',
+            templateUrl: 'client/core/core.coffeeBarDetail.ng.html',
+            controller: 'CoffeeBarDetailController',
+            controllerAs: 'vm',
+            data: {
+                bodyClass: "coffeeBar"
+            },
+            resolve: {
+                'coffeesForBar': [
+                    '$meteor', '$stateParams', function($meteor, $stateParams) {
+                        return $meteor.subscribe('coffeesForBar', $stateParams.uid);
+                    }
+                ],
+                'coffeeBar': [
+                    '$meteor', '$stateParams', function($meteor, $stateParams) {
+                        return $meteor.subscribe('coffeeBar', $stateParams.uid);
+                    }
+                ]
+            }
+        });
 
-        $urlRouterProvider.otherwise("/");
-    });
+    $urlRouterProvider.otherwise("/");
+});
 

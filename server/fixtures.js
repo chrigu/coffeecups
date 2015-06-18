@@ -1,6 +1,6 @@
 // Fixture data
 
-var bar;
+var bar1, bar2, bar3;
 
 if (CoffeeTypes.find().count() === 0) {
 
@@ -20,7 +20,8 @@ if (CoffeeBars.find().count() === 0) {
         name: "Adrianos",
         city: "Bern",
         address: "Some address",
-        country: "CH"
+        country: "CH",
+        position: { type: "Point", coordinates: [ 7.4290529, 46.9320139 ] }
     });
 
     bar2 = CoffeeBars.insert({

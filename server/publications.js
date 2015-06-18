@@ -2,12 +2,17 @@ Meteor.publish('coffees', function(options) {
     return Coffees.find({}, options);
 });
 
-Meteor.publish('bestCoffees', function(options) {
-    return Coffees.find({sort: {score: -1}, limit: 10});
+Meteor.publish('coffee', function(id) {
+    check(id, String);
+    return Coffees.find({_id: id});
 });
 
+//Meteor.publish('bestCoffees', function(options) {
+//    console.log("best");
+//    return Coffees.find({}, {sort: {score: -1}, limit: 10});
+//});
+
 Meteor.publish('coffeesForBar', function(id) {
-    console.log(id);
     check(id, String);
     return Coffees.find({barId: id});
 });
@@ -18,6 +23,11 @@ Meteor.publish('coffeeBars', function(options) {
     //    limit: Number
     //});
     return CoffeeBars.find({}, options);
+});
+
+Meteor.publish('coffeeBar', function(id){
+    check(id, String);
+    return CoffeeBars.find({_id: id});
 });
 
 Meteor.publish('nearCoffeeBars', function (latlng) {

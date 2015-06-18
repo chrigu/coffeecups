@@ -75,9 +75,9 @@
 
         </div>
         <div class="col-md-6">
-            <h3>Kaffees in deiner Nähe</h3>
+            <h3>Alle Kaffees</h3>
             <ul>
-                <li ng-repeat="coffeeBar in vm.nearCoffeeBars"><a ui-sref="coffeeBar({ uid: coffeeBar._id })">{{ coffeeBar.name }}</a></li>
+                <li ng-repeat="coffeeBar in vm.coffeeBars"><a ui-sref="coffeeBar({ uid: coffeeBar._id })">{{ coffeeBar.name }}</a></li>
             </ul>
             <h3>Beste Kaffees</h3>
             <ul>
