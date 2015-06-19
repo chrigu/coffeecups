@@ -1,6 +1,6 @@
 
 angular.module('coffeeCups.core')
-    .controller('CoffeeDetailController', function ($scope, $meteor, $geolocation, $stateParams, coffee) {
+    .controller('CoffeeDetailController', function ($scope, $meteor, $stateParams, coffee) {
 
         var self = this;
         activate();
@@ -11,7 +11,7 @@ angular.module('coffeeCups.core')
 
         function activate() {
             self.coffee = $meteor.object(Coffees, $stateParams.uid);
-            self.coffeeBar = $meteor.object(CoffeeBars, self.coffee.barId).subscribe("coffeeBar", self.coffeeBarId);
+            self.coffeeBar = $meteor.object(CoffeeBars, self.coffee.barId).subscribe("coffeeBar", self.coffee.barId);
             console.log(self.coffee);
             console.log(self.coffeeBar);
         }

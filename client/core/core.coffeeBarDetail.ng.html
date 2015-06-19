@@ -19,7 +19,7 @@
     <div class="row">
         <div class="col-md-12">
             <ul>
-                <li ng-repeat="coffee in vm.coffees" ng-bind="coffee.barName"></li>
+                <li ng-repeat="coffee in vm.coffees"><a ui-sref="coffee({ uid: coffee._id })" ng-bind="coffee.coffeeType"></a></li>
             </ul>
         </div>
     </div>

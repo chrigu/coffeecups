@@ -1,6 +1,6 @@
 
 angular.module('coffeeCups.core')
-    .controller('MainController', function ($scope, $meteor, $geolocation, $state, coffees, coffeeBars) {
+    .controller('MainController', function ($scope, $meteor, locationService, $state, coffees, coffeeBars) {
 
         var self = this;
         activate();
@@ -15,7 +15,7 @@ angular.module('coffeeCups.core')
         });
 
         function activate() {
-            //self.infoClass = "";
+            self.searchLocation = "";
             self.bestCoffees = $meteor.collection(function() {
                 return Coffees.find({}, {sort: {score: -1}, limit: 10});
             });
@@ -25,9 +25,7 @@ angular.module('coffeeCups.core')
             self.location = {};
 
 
-            $geolocation.getCurrentPosition({
-                timeout: 60000
-            }).then(function(position) {
+            locationService.getLocation().then(function(position) {
                 self.myPosition = position;
                 self.map = {center: {latitude: self.myPosition.coords.latitude,
                     longitude: self.myPosition.coords.longitude },
