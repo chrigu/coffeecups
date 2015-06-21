@@ -1,6 +1,6 @@
 // Fixture data
 
-var bar1, bar2, bar3;
+var bar1, bar2, bar3, bar4;
 
 if (CoffeeTypes.find().count() === 0) {
 
@@ -28,14 +28,24 @@ if (CoffeeBars.find().count() === 0) {
         name: "Bubbles",
         city: "Lausanne",
         address: "Une adresse",
-        country: "CH"
+        country: "CH",
+        position: { type: "Point", coordinates: [ 6.66, 46.5 ] }
     });
 
     bar3 = CoffeeBars.insert({
         name: "Some coffee",
         city: "Chur",
         address: "Adressä 1",
-        country: "CH"
+        country: "CH",
+        position: { type: "Point", coordinates: [ 9.5, 46.9 ] }
+    });
+
+    bar4 = CoffeeBars.insert({
+        name: "Luna",
+        city: "Bern",
+        address: "Some bern address",
+        country: "CH",
+        position: { type: "Point", coordinates: [ 7.4220529, 46.9340139 ] }
     });
 
 }
@@ -44,41 +54,56 @@ if (Coffees.find().count() === 0) {
     Coffees.insert({
         coffeeType: "Espresso",
         aroma: 3,
-        accessories: 2,
+        accessories: 0,
         additional: 1,
-        appearance: 2,
+        appearance: 1,
+        atmosphere: 1,
         barName: "Adrianos",
         barCity: "Bern",
         barId: bar1
     });
     Coffees.insert({
         coffeeType: "Cappuccino",
-        aroma: 1,
-        accessories: 2,
-        additional: 1,
-        appearance: 2,
+        aroma: 3,
+        accessories: 1,
+        additional: 0,
+        appearance: 1,
+        atmosphere: 1,
         barName: "Adrianos",
         barCity: "Bern",
         barId: bar1
     });
     Coffees.insert({
         coffeeType: "Cappuccino",
-        aroma: 1,
-        accessories: 4,
+        aroma: 3,
+        accessories: -1,
         additional: 1,
-        appearance: 2,
+        appearance: 0,
+        atmosphere: 1,
         barName: "Bubbles",
         barCity: "Lausanne",
         barId: bar2
     });
     Coffees.insert({
         coffeeType: "Cappuccino",
-        aroma: 1,
-        accessories: 4,
-        additional: 1,
-        appearance: 3,
+        aroma: 5,
+        accessories: 0,
+        additional: -1,
+        appearance: -1,
+        atmosphere: 1,
         barName: "Some coffee",
         barCity: "Luzern",
         barId: bar3
+    });
+    Coffees.insert({
+        coffeeType: "Cappuccino",
+        aroma: 4,
+        accessories: 1,
+        additional: 1,
+        appearance: 0,
+        atmosphere: 1,
+        barName: "Luna",
+        barCity: "Bern",
+        barId: bar4
     });
 }

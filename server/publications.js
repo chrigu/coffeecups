@@ -26,6 +26,16 @@ Meteor.publish('coffeeBar', function(id){
     return CoffeeBars.find({_id: id});
 });
 
+//Meteor.publish('coffeeBarsInBoundingBox', function(box) {
+//    return CoffeeBars.find({
+//        "position": {
+//            $geoWithin: {
+//                $box: box
+//            }
+//        }
+//    });
+//});
+
 //Meteor.publish('nearCoffeeBars', function (latlng) {
 //   if(latlng) {
 //       return CoffeeBars.find({
