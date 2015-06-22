@@ -43,9 +43,9 @@
             <ul>
                 <li ng-repeat="coffeeBar in vm.nearCoffeeBars"><a ui-sref="coffeeBar({ uid: coffeeBar._id })">{{ coffeeBar.name }}</a></li>
             </ul>
-            <h3>Beste Kaffees</h3>
+            <h3>Gute Kaffees in der Nähe</h3>
             <ul>
-                <li ng-repeat="coffee in vm.bestCoffees"><a ui-sref="coffee({ uid: coffee._id })">{{ coffee.coffeeType }} im {{ coffee.barName}}</a></li>
+                <li ng-repeat="coffee in vm.nearCoffees"><a ui-sref="coffee({ uid: coffee._id })">{{ coffee.coffeeType }} im {{ coffee.barName}}</a></li>
             </ul>
         </div>
     </div>
@@ -68,10 +68,10 @@
                 <th>Bewertung</th>
                 <th>Ort</th>
                 </thead>
-                <tr ng-repeat="coffee in vm.allCoffees |filter:{barCity: vm.searchLocation}" ng-click="vm.showCoffee(coffee._id)">
+                <tr ng-repeat="coffee in vm.bestCoffees |filter:{barCity: vm.searchLocation} | limitTo:10" ng-click="vm.showCoffee(coffee._id)">
                     <td>{{ coffee.coffeeType }}</td>
                     <td>{{ coffee.barName }}</td>
-                    <td>{{ coffee.rating }}</td>
+                    <td>{{ coffee.score }}</td>
                     <td>{{ coffee.type }}</td>
                     <td>{{ coffee.barCity }}</td>
                 </tr>

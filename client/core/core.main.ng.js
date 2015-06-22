@@ -45,23 +45,23 @@ angular.module('coffeeCups.core')
                     }
                 });
             });
-            console.log(self.mapCoffeeBars);
         }
 
         function activate() {
             self.searchLocation = "";
             self.bestCoffees = $meteor.collection(function() {
-                return Coffees.find({}, {sort: {score: -1}, limit: 10});
+                //return Coffees.find({}, {sort: {score: -1}, limit: 10});
+                return Coffees.find({}, {sort: {score: -1}});
             });
             self.coffeeBars = $meteor.collection(CoffeeBars, false);
             self.allCoffees = $meteor.collection(Coffees, false);
             self.nearCoffeeBars = [];
             self.mapCoffeeBars = [];
+            self.nearCoffees = [];
             self.location = {};
 
-
-
             locationService.getLocation().then(function(position) {
+                var nearBarsIds = [];
                 self.location = position;
                 self.map = {
                     center: {
@@ -96,6 +96,14 @@ angular.module('coffeeCups.core')
                     });
                 });
                 console.log(self.nearCoffeeBars);
+
+                nearBarsIds = _.pluck(self.nearCoffeeBars, '_id');
+                self.nearCoffees = $meteor.collection(function() {
+                    return Coffees.find({
+                        barId: { $in: nearBarsIds }
+                    }, {sort: {score: -1}}
+                    );
+                });
 
                 //getBarsOnMap(self.map.bounds);
             });

@@ -58,6 +58,7 @@ if (Coffees.find().count() === 0) {
         additional: 1,
         appearance: 1,
         atmosphere: 1,
+        score: 6,
         barName: "Adrianos",
         barCity: "Bern",
         barId: bar1
@@ -69,6 +70,7 @@ if (Coffees.find().count() === 0) {
         additional: 0,
         appearance: 1,
         atmosphere: 1,
+        score: 6,
         barName: "Adrianos",
         barCity: "Bern",
         barId: bar1
@@ -80,6 +82,7 @@ if (Coffees.find().count() === 0) {
         additional: 1,
         appearance: 0,
         atmosphere: 1,
+        score: 4,
         barName: "Bubbles",
         barCity: "Lausanne",
         barId: bar2
@@ -102,6 +105,7 @@ if (Coffees.find().count() === 0) {
         additional: 1,
         appearance: 0,
         atmosphere: 1,
+        score: 7,
         barName: "Luna",
         barCity: "Bern",
         barId: bar4

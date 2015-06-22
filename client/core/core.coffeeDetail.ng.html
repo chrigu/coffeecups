@@ -7,7 +7,7 @@
         </ol>
     </div>
 
-    <h2 ng-bind-template="{{ vm.coffee.coffeeType }} {{ vm.coffee.barName }} in {{ vm.coffee.barCity }}"></h2>
+    <h2 ng-bind-template="{{ vm.coffee.coffeeType }}, {{ vm.coffee.barName }} in {{ vm.coffee.barCity }}"></h2>
 
     <div class="row coffee-rating">
         <div class="col-md-6">
@@ -16,13 +16,13 @@
                     <cc-score name="Aroma" max="5" score="vm.coffee.aroma"></cc-score>
                 </li>
                 <li class="col-md-12 coffee-rating__score coffee-rating__score--appearance">
-                    <cc-score name="Appearance" max="5" score="vm.coffee.appearance"></cc-score>
+                    <cc-score name="Appearance" max="1" score="vm.coffee.appearance"></cc-score>
                 </li>
                 <li class="col-md-12 coffee-rating__score coffee-rating__score--atmosphere">
-                    <cc-score name="Atmosphere" max="5" score="vm.coffee.atmosphere"></cc-score>
+                    <cc-score name="Atmosphere" max="1" score="vm.coffee.atmosphere"></cc-score>
                 </li>
                 <li class="col-md-12 coffee-rating__score coffee-rating__score--additional">
-                    <cc-score name="Additional" max="5" score="vm.coffee.additional"></cc-score>
+                    <cc-score name="Additional" max="1" score="vm.coffee.additional"></cc-score>
                 </li>
             </ul>
         </div>

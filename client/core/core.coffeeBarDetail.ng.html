@@ -15,4 +15,19 @@
             </ul>
         </div>
     </div>
+    <div class="row">
+        <ui-gmap-google-map center="vm.coffeeBar.position.coordinates"
+                            zoom="14"
+
+                >
+            <ui-gmap-marker
+                    idKey="'_id'"
+                    labelContent='vm.coffeeBar.name'
+                    coords="vm.coffeeBar.position"
+                    icon="'/assets/poi.png'"
+
+                    >
+            </ui-gmap-marker>
+        </ui-gmap-google-map>
+    </div>
 </div>
