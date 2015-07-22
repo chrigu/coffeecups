@@ -29,7 +29,7 @@ angular.module('coffeeCups.core')
             leafletData.getMap().then(function(map) {
                 map.setView(latLng, 15);
             });
-            
+
             //self.layers =  {
             //    baselayers: {
             //        xyz: {
