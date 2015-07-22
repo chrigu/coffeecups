@@ -17,26 +17,9 @@
     </div>
 </div>
 <div class="container container-fluid" role="main">
-
     <div class="row">
         <div class="col-md-6">
-            <ui-gmap-google-map center="vm.map.center"
-                                zoom="vm.map.zoom"
-                                bounds="vm.map.bounds"
-                                events="vm.map.events"
-                    >
-                <ui-gmap-markers
-                        models="vm.coffeeBars"
-
-                        idKey="'_id'"
-                        labelContent='vm.coffeeBars.name'
-
-                        coords="'position'"
-                        icon="'/assets/poi.png'"
-
-                        >
-                </ui-gmap-markers>
-            </ui-gmap-google-map>
+            <leaflet width="100%" height="480px" markers="vm.markers"></leaflet>
         </div>
         <div class="col-md-6">
             <h3>Kaffees in deiner Nähe</h3>
@@ -45,7 +28,7 @@
             </ul>
             <h3>Gute Kaffees in der Nähe</h3>
             <ul>
-                <li ng-repeat="coffee in vm.nearCoffees"><a ui-sref="coffee({ uid: coffee._id })">{{ coffee.coffeeType }} im {{ coffee.barName}}</a></li>
+                <li ng-repeat="coffee in vm.nearCoffees"><a ui-sref="coffeeBarCoffee({ uid: coffee.barId, coffeeType: coffee.coffeeType })">{{ coffee.coffeeType }} im {{ coffee.barName}}</a></li>
             </ul>
         </div>
     </div>

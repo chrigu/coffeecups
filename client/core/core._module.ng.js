@@ -1,1 +1,1 @@
-angular.module('coffeeCups.core',['angular-meteor', 'ui.router']);
+angular.module('coffeeCups.core',['angular-meteor', 'ui.router', 'leaflet-directive']);

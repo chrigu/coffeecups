@@ -2,7 +2,7 @@
     <div class="breadcrumbs row">
         <ol class="breadcrumb">
             <li><a href="/">Übersicht</a></li>
-            <li>{{ vm.coffee.barName }}</li>
+            <li>{{ vm.coffeeBar.name }}</li>
         </ol>
     </div>
 
@@ -11,23 +11,39 @@
     <div class="row">
         <div class="col-md-12">
             <ul>
-                <li ng-repeat="coffee in vm.coffees"><a ui-sref="coffee({ uid: coffee._id })" ng-bind="coffee.coffeeType"></a></li>
+                <li ng-repeat="coffee in vm.coffees" ng-click="vm.selectedCoffee = coffee">
+                    <p ng-bind="coffee.coffeeType"></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+        <div class="row coffee-rating">
+        <div class="col-md-6">
+            <div class="coffee-rating__total" ng-bind-template="{{vm.selectedCoffee.coffeeType}}"></div>
+            <div class="coffee-rating__total" ng-bind-template="{{vm.selectedCoffee.score}}"></div>
+            <ul>
+                <li>
+                    <div class="coffee-rating__score">
+                        <p><span class="coffee-rating__score__aspect">Aroma</span>: <span ng-bind-template="{{vm.selectedCoffee.aroma}}/10"></span></p>
+                    </div>
+                </li>
+                <li class="col-md-12 coffee-rating__score coffee-rating__score--aroma">
+                    <cc-score name="Aroma" max="5" score="vm.selectedCoffee.aroma"></cc-score>
+                </li>
+                <li class="col-md-12 coffee-rating__score coffee-rating__score--appearance">
+                    <cc-score name="Appearance" max="1" score="vm.selectedCoffee.appearance"></cc-score>
+                </li>
+                <li class="col-md-12 coffee-rating__score coffee-rating__score--atmosphere">
+                    <cc-score name="Atmosphere" max="1" score="vm.selectedCoffee.atmosphere"></cc-score>
+                </li>
+                <li class="col-md-12 coffee-rating__score coffee-rating__score--additional">
+                    <cc-score name="Additional" max="1" score="vm.selectedCoffee.additional"></cc-score>
+                </li>
             </ul>
         </div>
     </div>
     <div class="row">
-        <ui-gmap-google-map center="vm.coffeeBar.position.coordinates"
-                            zoom="14"
-
-                >
-            <ui-gmap-marker
-                    idKey="'_id'"
-                    labelContent='vm.coffeeBar.name'
-                    coords="vm.coffeeBar.position"
-                    icon="'/assets/poi.png'"
-
-                    >
-            </ui-gmap-marker>
-        </ui-gmap-google-map>
+        <leaflet width="100%" height="480px" markers="vm.markers"></leaflet>
     </div>
+
 </div>

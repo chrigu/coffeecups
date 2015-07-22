@@ -53,12 +53,12 @@ if (CoffeeBars.find().count() === 0) {
 if (Coffees.find().count() === 0) {
     Coffees.insert({
         coffeeType: "Espresso",
-        aroma: 3,
+        aroma: 6,
         accessories: 0,
         additional: 1,
         appearance: 1,
         atmosphere: 1,
-        score: 6,
+        score: 9,
         barName: "Adrianos",
         barCity: "Bern",
         barId: bar1

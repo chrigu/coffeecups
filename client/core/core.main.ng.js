@@ -1,6 +1,6 @@
 
 angular.module('coffeeCups.core')
-    .controller('MainController', function ($scope, $meteor, locationService, $state, coffees, coffeeBars) {
+    .controller('MainController', function ($scope, $meteor, locationService, $state, coffees, coffeeBars, leafletData) {
 
         var self = this;
         activate();
@@ -14,9 +14,21 @@ angular.module('coffeeCups.core')
             coffeeBars.stop();
         });
 
+        function getMarkers(coffeeBars) {
+            coffeeBars.forEach(function (bar) {
+                self.markers[bar._id] = {
+                    lat: bar.position.coordinates[1],
+                    lng: bar.position.coordinates[0],
+                    focus: false,
+                    title: bar.name,
+                    draggable: false
+                }
+            });
+        }
+
         function getBarsOnMap(boundingBox) {
 
-            // minimong does not support $geoWithin, so we get the diagonal of the bounding box
+            // minimongo does not support $geoWithin, so we get the diagonal of the bounding box
             // and use a circle so that we can use $near from the center of the map with
             // the diagonal as $maxDistance
 
@@ -59,24 +71,33 @@ angular.module('coffeeCups.core')
             self.mapCoffeeBars = [];
             self.nearCoffees = [];
             self.location = {};
+            self.markers = {};
+
+            // Todo: don't show map until position
 
             locationService.getLocation().then(function(position) {
-                var nearBarsIds = [];
-                self.location = position;
-                self.map = {
-                    center: {
-                        latitude: self.location.coords.latitude,
-                        longitude: self.location.coords.longitude
-                    },
-                    zoom: 14,
-                    bounds: {},
-                    events: {
-                        dragend: function() {
-                            getBarsOnMap(self.map.bounds);
-                        }
-                    }
-                };
+                var nearBarsIds, latLng;
 
+                latLng = L.latLng(position.coords.latitude, position.coords.longitude);
+                nearBarsIds = [];
+                self.location = position;
+                //self.map = {
+                //    center: {
+                //        latitude: self.location.coords.latitude,
+                //        longitude: self.location.coords.longitude
+                //    },
+                //    zoom: 14,
+                //    bounds: {},
+                //    events: {
+                //        dragend: function() {
+                //            getBarsOnMap(self.map.bounds);
+                //        }
+                //    }
+                //};
+
+                leafletData.getMap().then(function(map) {
+                    map.setView(latLng, 15);
+                });
 
                 console.log(self.location.coords);
                 //self.nearCoffeeBars = $meteor.collection(CoffeeBars).subscribe('nearCoffeeBars',
@@ -100,10 +121,13 @@ angular.module('coffeeCups.core')
                 nearBarsIds = _.pluck(self.nearCoffeeBars, '_id');
                 self.nearCoffees = $meteor.collection(function() {
                     return Coffees.find({
-                        barId: { $in: nearBarsIds }
-                    }, {sort: {score: -1}}
+                            barId: { $in: nearBarsIds }
+                        }, {sort: {score: -1}}
                     );
                 });
+                console.log(self.nearCoffees);
+
+                getMarkers(self.nearCoffeeBars);
 
                 //getBarsOnMap(self.map.bounds);
             });

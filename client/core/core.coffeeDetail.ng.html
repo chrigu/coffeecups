@@ -11,7 +11,13 @@
 
     <div class="row coffee-rating">
         <div class="col-md-6">
+            <div class="coffee-rating__total" ng-bind-template="vm.coffee.score"></div>
             <ul>
+                <li>
+                    <div class="coffee-rating__score">
+                        <p><span class="coffee-rating__score__aspect">Aroma</span>: <span ng-bind-template="{{vm.coffee.aroma}}/10"></span></p>
+                    </div>
+                </li>
                 <li class="col-md-12 coffee-rating__score coffee-rating__score--aroma">
                     <cc-score name="Aroma" max="5" score="vm.coffee.aroma"></cc-score>
                 </li>

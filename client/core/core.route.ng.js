@@ -60,6 +60,27 @@ angular.module("coffeeCups.core").config(function($urlRouterProvider, $stateProv
                     }
                 ]
             }
+        })
+        .state('coffeeBarCoffee', {
+            url: '/coffeebar/:uid/:coffeeType',
+            templateUrl: 'client/core/core.coffeeBarDetail.ng.html',
+            controller: 'CoffeeBarDetailController',
+            controllerAs: 'vm',
+            data: {
+                bodyClass: "coffeeBar"
+            },
+            resolve: {
+                'coffeesForBar': [
+                    '$meteor', '$stateParams', function($meteor, $stateParams) {
+                        return $meteor.subscribe('coffeesForBar', $stateParams.uid);
+                    }
+                ],
+                'coffeeBar': [
+                    '$meteor', '$stateParams', function($meteor, $stateParams) {
+                        return $meteor.subscribe('coffeeBar', $stateParams.uid);
+                    }
+                ]
+            }
         });
 
     $urlRouterProvider.otherwise("/");
