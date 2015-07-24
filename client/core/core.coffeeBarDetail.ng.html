@@ -9,41 +9,43 @@
     <h2>{{ vm.coffeeBar.name }} in {{ vm.coffeeBar.city }}</h2>
 
     <div class="row">
-        <div class="col-md-12">
-            <ul>
-                <li ng-repeat="coffee in vm.coffees" ng-click="vm.selectedCoffee = coffee">
-                    <p ng-bind="coffee.coffeeType"></p>
-                </li>
-            </ul>
+        <div class="coffee col-md-6">
+            <div class="col-md-3 coffee-list">
+                <ul>
+                    <li ng-repeat="coffee in vm.coffees" ng-click="vm.changeCoffee(coffee)" ng-class="{'coffee-list--selected': coffee == vm.selectedCoffee}">
+                        <p ng-bind="coffee.coffeeType"></p>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6 coffee-rating">
+                <div class="coffee-rating__total col-md-12">
+                    <span class="coffee-rating__total__title">Punkte:</span>
+                    <span class="coffee-rating__total__score" ng-bind="vm.selectedCoffee.score"></span>
+                    <span class="coffee-rating__total__max">/15</span>
+                </div>
+                <div class="coffee-rating__aroma col-md-12">
+                    <span class="coffee-rating__aroma__title">Aroma:</span>
+                    <span class="coffee-rating__aroma__score" ng-bind="vm.selectedCoffee.aroma"></span>
+                    <span class="coffee-rating__aroma__max">/10</span>
+                </div>
+                <ul coffee-rating__>
+                    <li class="col-md-12 coffee-rating__score coffee-rating__score--aroma">
+                        <cc-score title="Aroma" max="5" attribute="aroma" coffee="vm.selectedCoffee"></cc-score>
+                    </li>
+                    <li class="col-md-12 coffee-rating__score coffee-rating__score--appearance">
+                        <cc-score title="Appearance" max="1" attribute="appearance" coffee="vm.selectedCoffee"></cc-score>
+                    </li>
+                    <li class="col-md-12 coffee-rating__score coffee-rating__score--atmosphere">
+                        <cc-score title="Atmosphere" max="1" attribute="atmosphere" coffee="vm.selectedCoffee"></cc-score>
+                    </li>
+                    <li class="col-md-12 coffee-rating__score coffee-rating__score--additional">
+                        <cc-score title="Additional" max="1" attribute="additional" coffee="vm.selectedCoffee"></cc-score>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-        <div class="row coffee-rating">
         <div class="col-md-6">
-            <div class="coffee-rating__total" ng-bind-template="{{vm.selectedCoffee.coffeeType}}"></div>
-            <div class="coffee-rating__total" ng-bind-template="{{vm.selectedCoffee.score}}"></div>
-            <ul>
-                <li>
-                    <div class="coffee-rating__score">
-                        <p><span class="coffee-rating__score__aspect">Aroma</span>: <span ng-bind-template="{{vm.selectedCoffee.aroma}}/10"></span></p>
-                    </div>
-                </li>
-                <li class="col-md-12 coffee-rating__score coffee-rating__score--aroma">
-                    <cc-score name="Aroma" max="5" score="vm.selectedCoffee.aroma"></cc-score>
-                </li>
-                <li class="col-md-12 coffee-rating__score coffee-rating__score--appearance">
-                    <cc-score name="Appearance" max="1" score="vm.selectedCoffee.appearance"></cc-score>
-                </li>
-                <li class="col-md-12 coffee-rating__score coffee-rating__score--atmosphere">
-                    <cc-score name="Atmosphere" max="1" score="vm.selectedCoffee.atmosphere"></cc-score>
-                </li>
-                <li class="col-md-12 coffee-rating__score coffee-rating__score--additional">
-                    <cc-score name="Additional" max="1" score="vm.selectedCoffee.additional"></cc-score>
-                </li>
-            </ul>
+            <leaflet class="bar-map map" height="320px" markers="vm.markers"></leaflet>
         </div>
     </div>
-    <div class="row">
-        <leaflet width="100%" height="480px" markers="vm.markers"></leaflet>
-    </div>
-
 </div>

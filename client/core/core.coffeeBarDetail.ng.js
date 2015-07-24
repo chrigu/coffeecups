@@ -10,11 +10,16 @@ angular.module('coffeeCups.core')
             coffeesForBar.stop();
         });
 
+        self.changeCoffee = function(coffee) {
+            self.selectedCoffee = coffee;
+            $scope.$broadcast('coffee:change', self.selectedCoffee);
+        };
+
         function activate() {
             self.coffeeBar = $meteor.object(CoffeeBars, $stateParams.uid);
             self.coffees = $meteor.collection(Coffees);
             self.selectedCoffee = self.coffees[0];
-            console.log(self.coffees);
+
             //pre-select the right coffee
             if ($stateParams.coffeeType) {
                 var coffeeWithType = _.find(self.coffees, {'coffeeType': $stateParams.coffeeType});

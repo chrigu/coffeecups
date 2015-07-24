@@ -2,8 +2,9 @@ angular.module('coffeeCups.core')
     .directive('ccScore', function() {
         return {
             scope: {
-                name: '@',
-                score: '=',
+                title: '@',
+                attribute: '@',
+                coffee: '=',
                 max: '@'
             },
             restrict: 'E',
@@ -17,9 +18,14 @@ angular.module('coffeeCups.core')
 
         activate();
 
+        $scope.$on("coffee:change", function(event, coffee) {
+            self.coffee = coffee;
+        });
+
         function activate() {
-            self.name = $scope.name;
-            self.score = $scope.score;
+            self.title = $scope.title;
+            self.attribute = $scope.attribute;
+            self.coffee = $scope.coffee;
             self.max = parseInt($scope.max);
         }
 

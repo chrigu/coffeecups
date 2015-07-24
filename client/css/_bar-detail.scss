@@ -1,0 +1,23 @@
+.coffee-rating, .coffee-list {
+  ul {
+    list-style: none;
+  }
+}
+
+.coffee-rating {
+  background-color: $light-grey;
+}
+
+.coffee-list {
+
+  padding-right: 0;
+  padding-left: 0;
+  
+  &--selected {
+    background-color: $light-grey;
+  }
+
+  li:hover {
+    cursor: pointer;
+  }
+}

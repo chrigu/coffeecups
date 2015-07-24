@@ -5,59 +5,70 @@ angular.module('coffeeCups.core')
         var self = this;
         activate();
 
-        self.showCoffee = function(id) {
-            $state.go("coffee", {uid: id});
-        };
+        //handle events
 
         $scope.$on('$destroy', function() {
             coffees.stop();
             coffeeBars.stop();
         });
 
-        function getMarkers(coffeeBars) {
+        $scope.$on("leafletDirectiveMap.dragend", function(event) {
+                getBarsOnMap();
+        });
+
+        $scope.$on("leafletDirectiveMap.zoomlevelschange", function(event) {
+
+            getBarsOnMap();
+
+        });
+
+        function setMarkers(coffeeBars) {
             coffeeBars.forEach(function (bar) {
                 self.markers[bar._id] = {
                     lat: bar.position.coordinates[1],
                     lng: bar.position.coordinates[0],
                     focus: false,
                     title: bar.name,
+                    message: bar.name,
                     draggable: false
-                }
+                };
             });
         }
 
-        function getBarsOnMap(boundingBox) {
+        function getBarsOnMap() {
 
             // minimongo does not support $geoWithin, so we get the diagonal of the bounding box
             // and use a circle so that we can use $near from the center of the map with
             // the diagonal as $maxDistance
+            leafletData.getMap().then(function(map) {
+                var diameter, mapCoffeeBars;
+                //var box = [
+                //    [boundingBox.southwest.longitude, boundingBox.southwest.latitude],
+                //    [boundingBox.northeast.longitude, boundingBox.northeast.latitude]
+                //];
+                diameter = locationService.getDistance(map.getBounds()._southWest, map.getBounds()._northEast);
 
-            var diameter;
-
-            console.log(boundingBox);
-            //var box = [
-            //    [boundingBox.southwest.longitude, boundingBox.southwest.latitude],
-            //    [boundingBox.northeast.longitude, boundingBox.northeast.latitude]
-            //];
-            diameter = locationService.getDistance(boundingBox.southwest, boundingBox.northeast);
-            console.log(diameter);
-
-            self.mapCoffeeBars = $meteor.collection(function() {
-                console.log(self.map);
-                var latlng = [self.map.center.longitude, self.map.center.latitude];
-                return CoffeeBars.find({
-                    "position": {
-                        $near: {
-                            $geometry: {
-                                type: "Point",
-                                coordinates: latlng
-                            },
-                            $maxDistance: diameter   //meters
+                mapCoffeeBars = $meteor.collection(function() {
+                    var latlng = [map.getCenter().lng, map.getCenter().lat];
+                    return CoffeeBars.find({
+                        "position": {
+                            $near: {
+                                $geometry: {
+                                    type: "Point",
+                                    coordinates: latlng
+                                },
+                                $maxDistance: diameter   //meters
+                            }
                         }
-                    }
+                    });
                 });
+                setMarkers(mapCoffeeBars);
             });
         }
+
+        self.showCoffee = function(id) {
+            $state.go("coffee", {uid: id});
+        };
 
         function activate() {
             self.searchLocation = "";
@@ -127,7 +138,7 @@ angular.module('coffeeCups.core')
                 });
                 console.log(self.nearCoffees);
 
-                getMarkers(self.nearCoffeeBars);
+                getBarsOnMap();
 
                 //getBarsOnMap(self.map.bounds);
             });
