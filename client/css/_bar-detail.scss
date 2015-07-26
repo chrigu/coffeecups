@@ -6,15 +6,22 @@
 
 .coffee-rating {
   background-color: $light-grey;
+  border: solid 1px $dark-grey;
 }
 
 .coffee-list {
 
   padding-right: 0;
   padding-left: 0;
+  z-index: 100;
   
   &--selected {
     background-color: $light-grey;
+    border: 1px solid $dark-grey;
+    border-right: 0px;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    margin-right: -1px;
   }
 
   li:hover {

@@ -44,14 +44,15 @@
             </select>
         </div>
         <div class="col-md-12">
-            <table class="table">
+            <table class="coffee-table table">
                 <thead>
                 <th>Kaffeetyp</th>
                 <th>Bar</th>
                 <th>Bewertung</th>
                 <th>Ort</th>
                 </thead>
-                <tr ng-repeat="coffee in vm.bestCoffees |filter:{barCity: vm.searchLocation} | limitTo:10" ng-click="vm.showCoffee(coffee._id)">
+                <tr ng-repeat="coffee in vm.bestCoffees |filter:{barCity: vm.searchLocation} | limitTo:10"
+                    ng-click="vm.showCoffee(coffee)" class="coffee-table__item">
                     <td>{{ coffee.coffeeType }}</td>
                     <td>{{ coffee.barName }}</td>
                     <td>{{ coffee.score }}</td>
@@ -68,7 +69,7 @@
             </ul>
             <h3>Beste Kaffees</h3>
             <ul>
-                <li ng-repeat="coffee in vm.bestCoffees"><a ui-sref="coffee({ uid: coffee._id })">{{ coffee.coffeeType }} im {{ coffee.barName}}</a></li>
+                <li ng-repeat="coffee in vm.bestCoffees"><a ui-sref="coffeeBarCoffee({ uid: coffee.barId, coffeeType: coffee.coffeeType })">{{ coffee.coffeeType }} im {{ coffee.barName}}</a></li>
             </ul>
         </div>
     </div>

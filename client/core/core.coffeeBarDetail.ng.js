@@ -17,16 +17,19 @@ angular.module('coffeeCups.core')
 
         function activate() {
             self.coffeeBar = $meteor.object(CoffeeBars, $stateParams.uid);
+            console.log($stateParams);
             self.coffees = $meteor.collection(Coffees);
             self.selectedCoffee = self.coffees[0];
 
             //pre-select the right coffee
             if ($stateParams.coffeeType) {
-                var coffeeWithType = _.find(self.coffees, {'coffeeType': $stateParams.coffeeType});
-                console.log(coffeeWithType);
-                if (coffeeWithType) {
+                var coffeeWithType = $meteor.object(Coffees,{'coffeeType': $stateParams.coffeeType}, false);
+                if (coffeeWithType._id) {
+                    console.log("somemememememmem")
                     self.selectedCoffee = coffeeWithType;
                 }
+                //var coffeeWithType = _.find(self.coffees, {'coffeeType': $stateParams.coffeeType});
+                console.log(coffeeWithType._id);
             }
             console.log(self.coffeeBar.position);
 

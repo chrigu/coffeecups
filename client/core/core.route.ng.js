@@ -24,22 +24,6 @@ angular.module("coffeeCups.core").config(function($urlRouterProvider, $stateProv
                 ]
             }
         })
-        .state('coffee', {
-            url: '/coffee/:uid',
-            templateUrl: 'client/core/core.coffeeDetail.ng.html',
-            controller: 'CoffeeDetailController',
-            controllerAs: 'vm',
-            data: {
-                bodyClass: "coffee"
-            },
-            resolve: {
-                'coffee': [
-                    '$meteor', '$stateParams', function($meteor, $stateParams) {
-                        return $meteor.subscribe('coffee', $stateParams.uid);
-                    }
-                ]
-            }
-        })
         .state('coffeeBar', {
             url: '/coffeebar/:uid',
             templateUrl: 'client/core/core.coffeeBarDetail.ng.html',

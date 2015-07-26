@@ -12,7 +12,7 @@
         <div class="coffee col-md-6">
             <div class="col-md-3 coffee-list">
                 <ul>
-                    <li ng-repeat="coffee in vm.coffees" ng-click="vm.changeCoffee(coffee)" ng-class="{'coffee-list--selected': coffee == vm.selectedCoffee}">
+                    <li ng-repeat="coffee in vm.coffees" ng-click="vm.changeCoffee(coffee)" ng-class="{'coffee-list--selected': coffee._id == vm.selectedCoffee._id}">
                         <p ng-bind="coffee.coffeeType"></p>
                     </li>
                 </ul>

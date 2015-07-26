@@ -20,7 +20,6 @@ angular.module('coffeeCups.core').factory('locationService', function($geolocati
     };
 
     factory.getLocation = function() {
-
         if (!location) {
             return  $geolocation.getCurrentPosition( { timeout: 60000 }).then(function(position) {
                 location = position;

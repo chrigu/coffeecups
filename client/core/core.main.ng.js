@@ -66,8 +66,8 @@ angular.module('coffeeCups.core')
             });
         }
 
-        self.showCoffee = function(id) {
-            $state.go("coffee", {uid: id});
+        self.showCoffee = function(coffee) {
+            $state.go("coffeeBarCoffee", { uid: coffee.barId, coffeeType: coffee.coffeeType });
         };
 
         function activate() {
