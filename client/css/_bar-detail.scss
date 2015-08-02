@@ -28,3 +28,9 @@
     cursor: pointer;
   }
 }
+
+.coffee-list, .coffee-rating {
+  ul {
+    padding-left: 0;
+  }
+}

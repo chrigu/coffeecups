@@ -1,6 +1,6 @@
 
 angular.module('coffeeCups.core')
-    .controller('MainController', function ($scope, $meteor, locationService, $state, coffees, coffeeBars, leafletData) {
+    .controller('MainController', function ($scope, $meteor, locationService, $state, coffees, coffeeBars, leafletData, $compile) {
 
         var self = this;
         activate();
@@ -13,13 +13,11 @@ angular.module('coffeeCups.core')
         });
 
         $scope.$on("leafletDirectiveMap.dragend", function(event) {
-                getBarsOnMap();
+            getBarsOnMap();
         });
 
-        $scope.$on("leafletDirectiveMap.zoomlevelschange", function(event) {
-
+        $scope.$on("leafletDirectiveMap.zoomend", function(event) {
             getBarsOnMap();
-
         });
 
         function setMarkers(coffeeBars) {
@@ -29,7 +27,7 @@ angular.module('coffeeCups.core')
                     lng: bar.position.coordinates[0],
                     focus: false,
                     title: bar.name,
-                    message: bar.name,
+                    message: "<a href='/coffeebar/" + bar._id + "'>" + bar.name + "</a>",
                     draggable: false
                 };
             });
@@ -42,11 +40,15 @@ angular.module('coffeeCups.core')
             // the diagonal as $maxDistance
             leafletData.getMap().then(function(map) {
                 var diameter, mapCoffeeBars;
-                //var box = [
-                //    [boundingBox.southwest.longitude, boundingBox.southwest.latitude],
-                //    [boundingBox.northeast.longitude, boundingBox.northeast.latitude]
-                //];
+
                 diameter = locationService.getDistance(map.getBounds()._southWest, map.getBounds()._northEast);
+
+                //on the first call the diameter is 0 as the map isn't displayed, as such we'll just add a default
+                //value (20km)
+
+                if (diameter === 0) {
+                    diameter = 20000;
+                }
 
                 mapCoffeeBars = $meteor.collection(function() {
                     var latlng = [map.getCenter().lng, map.getCenter().lat];
@@ -83,32 +85,16 @@ angular.module('coffeeCups.core')
             self.nearCoffees = [];
             self.location = {};
             self.markers = {};
+            self.showNear = true;
 
             // Todo: don't show map until position
 
             locationService.getLocation().then(function(position) {
-                var nearBarsIds, latLng;
+                var nearBarsIds, latLng, mapContainer, leafletElement;
 
                 latLng = L.latLng(position.coords.latitude, position.coords.longitude);
                 nearBarsIds = [];
                 self.location = position;
-                //self.map = {
-                //    center: {
-                //        latitude: self.location.coords.latitude,
-                //        longitude: self.location.coords.longitude
-                //    },
-                //    zoom: 14,
-                //    bounds: {},
-                //    events: {
-                //        dragend: function() {
-                //            getBarsOnMap(self.map.bounds);
-                //        }
-                //    }
-                //};
-
-                leafletData.getMap().then(function(map) {
-                    map.setView(latLng, 15);
-                });
 
                 console.log(self.location.coords);
                 //self.nearCoffeeBars = $meteor.collection(CoffeeBars).subscribe('nearCoffeeBars',
@@ -136,11 +122,17 @@ angular.module('coffeeCups.core')
                         }, {sort: {score: -1}}
                     );
                 });
-                console.log(self.nearCoffees);
 
-                getBarsOnMap();
+                mapContainer = angular.element(document.querySelector('.map-container'));
+                leafletElement = $compile('<leaflet width="100%" height="480px" markers="vm.markers"></leaflet>')( $scope );
+                mapContainer.append(leafletElement);
 
-                //getBarsOnMap(self.map.bounds);
+                leafletData.getMap().then(function(map) {
+                    map.setView(latLng, 15);
+                    getBarsOnMap();
+                });
+
+                self.showNear = false;
             });
         }
 

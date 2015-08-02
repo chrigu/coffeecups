@@ -28,10 +28,7 @@
                     <span class="coffee-rating__aroma__score" ng-bind="vm.selectedCoffee.aroma"></span>
                     <span class="coffee-rating__aroma__max">/10</span>
                 </div>
-                <ul coffee-rating__>
-                    <li class="col-md-12 coffee-rating__score coffee-rating__score--aroma">
-                        <cc-score title="Aroma" max="5" attribute="aroma" coffee="vm.selectedCoffee"></cc-score>
-                    </li>
+                <ul coffee-rating__secondary_values>
                     <li class="col-md-12 coffee-rating__score coffee-rating__score--appearance">
                         <cc-score title="Appearance" max="1" attribute="appearance" coffee="vm.selectedCoffee"></cc-score>
                     </li>

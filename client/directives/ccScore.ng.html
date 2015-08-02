@@ -1,6 +1,6 @@
 <div class="cc-rating">
-    <div class="cc-rating__score__title" ng-bind="vm.title"></div>
-    <div class="cc-rating__score__points" ng-bind-template="{{vm.coffee[vm.attribute]}}/{{vm.max}}"
+    <span class="cc-rating__score__title" ng-bind="vm.title"></span>
+    <span class="cc-rating__score__points" ng-bind-template="{{vm.coffee[vm.attribute]}}/{{vm.max}}"
             ng-class="{zero: vm.score == 0, twenty: vm.score == 1, fourty: vm.score == 2,
-            sixty: vm.score == 3, eighty: vm.score == 4, hundred: vm.score == 5}"></div>
+            sixty: vm.score == 3, eighty: vm.score == 4, hundred: vm.score == 5}"></span>
 </div>
